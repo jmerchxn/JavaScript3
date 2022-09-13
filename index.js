@@ -2,6 +2,10 @@ let admin = "administrador";
 let cliente = "cliente";
 let usuarioActual;
 
+let titulo = document.getElementById("titulo");
+let parrafoPelis = document.getElementById("parrafo-peliculas");
+let subitulo = document.getElementById("subtitulo");
+
 class Pelicula {
     constructor(nombre, tipo, minutos, genero) {
         this.nombre = nombre;
@@ -16,13 +20,14 @@ class Pelicula {
         var rminutos = Math.round(minutos);        
 
         return rhoras + "h" + " " + rminutos + "m"
-    }
+        }
 }
-const jujutsuKaisen = new Pelicula("Jujutsu Kaisen", "ATP", 84, "Acción/Fantasía");
-const elPadrino = new Pelicula("El Padrino", "+16", 177, "Crimen/Drama");
-const jurassicPark = new Pelicula("Jurassic Park", "ATP", 130, "Ciencia Ficción/Acción")
-let peliculas = [jujutsuKaisen, elPadrino, jurassicPark];
 
+const elPadrino = new Pelicula("El Padrino", "+16", 177, "Crimen/Drama");
+const jurassicPark = new Pelicula("Jurassic Park", "ATP", 130, "Ciencia Ficción/Acción");
+const jujutsuKaisen = new Pelicula("Jujutsu Kaisen", "ATP", 84, "Acción/Fantasía");
+
+let peliculas = [jujutsuKaisen, elPadrino, jurassicPark];
 
 
 function ingreseUsuario() {
@@ -31,32 +36,40 @@ function ingreseUsuario() {
         usuarioActual = prompt("Reingrese que tipo de usuario es 1.administrador - 2.cliente")
     }
     if (usuarioActual === admin) {
+        
         alert("Bienvenido administrador, a continuación cargue una película a la página")
-        let nombreDePeliculaASubir = prompt("Ingrese el nombre de la película que desea subir")
-        let tipoDePeliculaASubir = prompt("Ingrese el tipo de película")
+        let nombre = prompt("Ingrese el nombre de la película que desea subir")
+        let tipoDePeliculaASubir = prompt("Ingrese el tipo de película") 
         let minutosDePeliculaASubir = parseInt(prompt("Ingrese los minutos de duración de la película"))
         let generoDePeliculaASubir = prompt("Ingrese el género de la película")
-        subirPelicula(nombreDePeliculaASubir, tipoDePeliculaASubir, minutosDePeliculaASubir, generoDePeliculaASubir)
-        alert("Se ha ingresado " + nombreDePeliculaASubir + "." + " Las peliculas cargadas actualmente son :" + " " + mostrarPeliculas())
+        subirPelicula(nombre, tipoDePeliculaASubir, minutosDePeliculaASubir, generoDePeliculaASubir)
+        titulo.innerText = 'Bienvenido administrador'
+        subtitulo.innerText = 'Has cargado recientemente la pelicula: ' + nombre;
+        parrafoPelis.innerText = 'Las películas que se encuentran en la página son: ' + mostrarPeliculas();
     }
     else {
-        alert("Bienvenido cliente, a continuación seleccione que pelicula desea ver " + mostrarPeliculas())
+        titulo.innerText = 'Bienvenido cliente';
+        parrafoPelis.innerText = 'Las peliculas disponibles son: ' + mostrarPeliculas();
+
     }
 }
 
+
+
 function subirPelicula(nombreDePelicula, tipoDePelicula, minutosDePelicula, generoDePelicula) {
     const peliculaASubir = new Pelicula(nombreDePelicula, tipoDePelicula, minutosDePelicula, generoDePelicula)
+
     peliculas.push(peliculaASubir)
 }
 
 function mostrarPeliculas() {
-    let nombresDePeliculas = "";
-    for (let i = 0; i < peliculas.length; i++) {
-        nombresDePeliculas = nombresDePeliculas + " " + peliculas[i].nombre
-    } return nombresDePeliculas
+    let nombresDePeliculas = '';  
+    peliculas.forEach(pelicula => nombresDePeliculas = nombresDePeliculas + ' ' + pelicula.nombre);
+    return nombresDePeliculas;
 }
 
 
 
-ingreseUsuario()
+
+ingreseUsuario() 
 
