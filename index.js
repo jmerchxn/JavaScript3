@@ -2,7 +2,6 @@ let admin = "administrador";
 let cliente = "cliente";
 let usuarioActual;
 
-// Donde obtengo los elementos del html para modificarlos, o añadirle un evento como el click.
 let titulo = document.getElementById("titulo");
 let parrafoPelis = document.getElementById("parrafo-peliculas");
 let subitulo = document.getElementById("subtitulo");
@@ -68,7 +67,4 @@ function mostrarPeliculas() {
     return nombresDePeliculas;
 }
 
-// Aca estamos llamando a la funcion ingesar usuario mediante un EVENTO DE CLICK hacia el boton.
-    // Como conseguir el boton en js ? Mirate la linea 8 de este archivo.
-    // Y tambien mirate el id en el html que le puse al <button>Ingresar</button>
     boton.addEventListener("click", () => {ingreseUsuario(); boton.parentNode.removeChild(boton);});
