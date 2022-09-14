@@ -2,9 +2,11 @@ let admin = "administrador";
 let cliente = "cliente";
 let usuarioActual;
 
+// Donde obtengo los elementos del html para modificarlos, o añadirle un evento como el click.
 let titulo = document.getElementById("titulo");
 let parrafoPelis = document.getElementById("parrafo-peliculas");
 let subitulo = document.getElementById("subtitulo");
+let boton = document.getElementById("boton-ingresar")
 
 class Pelicula {
     constructor(nombre, tipo, minutos, genero) {
@@ -28,7 +30,6 @@ const jurassicPark = new Pelicula("Jurassic Park", "ATP", 130, "Ciencia Ficción
 const jujutsuKaisen = new Pelicula("Jujutsu Kaisen", "ATP", 84, "Acción/Fantasía");
 
 let peliculas = [jujutsuKaisen, elPadrino, jurassicPark];
-
 
 function ingreseUsuario() {
     usuarioActual = prompt("Ingrese que tipo de usuario es 1.administrador - 2.cliente");
@@ -55,7 +56,6 @@ function ingreseUsuario() {
 }
 
 
-
 function subirPelicula(nombreDePelicula, tipoDePelicula, minutosDePelicula, generoDePelicula) {
     const peliculaASubir = new Pelicula(nombreDePelicula, tipoDePelicula, minutosDePelicula, generoDePelicula)
 
@@ -68,8 +68,7 @@ function mostrarPeliculas() {
     return nombresDePeliculas;
 }
 
-
-
-
-ingreseUsuario() 
-
+// Aca estamos llamando a la funcion ingesar usuario mediante un EVENTO DE CLICK hacia el boton.
+    // Como conseguir el boton en js ? Mirate la linea 8 de este archivo.
+    // Y tambien mirate el id en el html que le puse al <button>Ingresar</button>
+    boton.addEventListener("click", () => {ingreseUsuario(); boton.parentNode.removeChild(boton);});
