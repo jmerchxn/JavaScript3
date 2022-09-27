@@ -1,15 +1,6 @@
 // Peliculas por default
-let peliculas = [jujutsuKaisen, elPadrino, jurassicPark];
 
 
-const elPadrino = new Pelicula("El Padrino", "+16", 177, "Crimen/Drama", "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRFnUIGQQtTzUxD9Y19nl3uum8SZA6TSA8eWnJoPy1UdHVF8fDn");
-const jurassicPark = new Pelicula("Jurassic Park", "ATP", 130, "Ciencia Ficción/Acción", "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSVvdES4O7zcoqcxElrT5cy33kFcDe4a20EzyB91x24yYMReIpy");
-const jujutsuKaisen = new Pelicula("Jujutsu Kaisen", "ATP", 84, "Acción/Fantasía", "https://img1.ak.crunchyroll.com/i/spire3/02c909684baa37d6ef70a9df742d58951610752067_main.jpg");
-
-
-localStorage.setItem("El padrino", JSON.stringify(elPadrino));
-localStorage.setItem("Jurassic Park", JSON.stringify(jurassicPark));
-localStorage.setItem("Jujutsu Kaisen", JSON.stringify(jujutsuKaisen));
 
 
 // Botones para controlar
@@ -34,6 +25,21 @@ class Pelicula {
         return rhoras + "h" + " " + rminutos + "m"
         }
 }
+
+
+const elPadrino = new Pelicula("El Padrino", "+16", 177, "Crimen/Drama", "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRFnUIGQQtTzUxD9Y19nl3uum8SZA6TSA8eWnJoPy1UdHVF8fDn");
+const jurassicPark = new Pelicula("Jurassic Park", "ATP", 130, "Ciencia Ficción/Acción", "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSVvdES4O7zcoqcxElrT5cy33kFcDe4a20EzyB91x24yYMReIpy");
+const jujutsuKaisen = new Pelicula("Jujutsu Kaisen", "ATP", 84, "Acción/Fantasía", "https://img1.ak.crunchyroll.com/i/spire3/02c909684baa37d6ef70a9df742d58951610752067_main.jpg");
+
+
+
+let peliculas = [jujutsuKaisen, elPadrino, jurassicPark];
+
+
+
+localStorage.setItem("El padrino", JSON.stringify(elPadrino));
+localStorage.setItem("Jurassic Park", JSON.stringify(jurassicPark));
+localStorage.setItem("Jujutsu Kaisen", JSON.stringify(jujutsuKaisen));
 
 
 
@@ -122,6 +128,9 @@ function crearFormulario(){
                 inputUrlImagePelicula.value);
             localStorage.setItem(inputNombrePelicula.value, JSON.stringify(peliculaASubir));
             alert('Pelicula subida con exito');
+            botonAñadirPelis.style.display = "flex";
+            botonVerPelis.style.display = "flex";
+            formulario.style.display = 'none';
         }
     });
 
