@@ -1,7 +1,3 @@
-// Peliculas por default
-
-
-
 
 // Botones para controlar
 const botonVerPelis = document.getElementById("boton-ver-pelis");
@@ -109,6 +105,22 @@ function crearFormulario(){
     inputUrlImagePelicula.setAttribute("id", "urlImagePelicula");
     inputUrlImagePelicula.setAttribute("class", "formulario__input");
 
+
+
+
+
+    // Creo el boton volver atras 
+    const botonVolverAtras = document.createElement('button');
+    botonVolverAtras.setAttribute('class', 'button');
+    botonVolverAtras.innerText = 'Volver Atras';
+    botonVolverAtras.addEventListener('click', () => {
+        botonAñadirPelis.style.display = "block";
+        botonVerPelis.style.display = "block";
+        formulario.style.display = 'none'
+        botonVolverAtras.style.display = 'none';
+    
+    })
+
     //Creo el boton enviar
     const botonEnviar = document.createElement("button");
     botonEnviar.innerText = "Enviar";
@@ -116,10 +128,16 @@ function crearFormulario(){
     botonEnviar.addEventListener('click', (event) => {
         event.preventDefault(); //Evito que se recargue la pagina
 
+
         //Operador OR
         if(inputNombrePelicula.value === '' || inputTipoPelicula.value === '' || inputMinutosPelicula.value === '' || inputGeneroPelicula.value === '' || inputUrlImagePelicula.value === '') {
             formulario.setAttribute('style', 'border: 3px solid red');
-            alert('Por favor, complete todos los campos');
+            Swal.fire({
+                title: 'Error!',
+                text: 'Porfavor complete todos los campos',
+                icon: 'error',
+                confirmButtonText: 'Cool'
+              })
         } else {
             const peliculaASubir = new Pelicula(inputNombrePelicula.value,
                 inputTipoPelicula.value,
@@ -127,12 +145,25 @@ function crearFormulario(){
                 inputGeneroPelicula.value,
                 inputUrlImagePelicula.value);
             localStorage.setItem(inputNombrePelicula.value, JSON.stringify(peliculaASubir));
-            alert('Pelicula subida con exito');
+            Swal.fire({
+                title: 'Exito',
+                text: 'La pelicula ha sido añadida a la base de datos',
+                icon: 'success',
+                confirmButtonText: 'Cool'
+              })
             botonAñadirPelis.style.display = "flex";
             botonVerPelis.style.display = "flex";
             formulario.style.display = 'none';
         }
     });
+
+    
+    // Creo div para los botones
+    let botonesContainer = document.createElement('div');
+    botonesContainer.setAttribute('class', 'botones-container');
+    botonesContainer.appendChild(botonEnviar);
+    botonesContainer.appendChild(botonVolverAtras);    
+;    
 
     //Agregar los inputs dentro del form
     formulario.appendChild(labelNombre);
@@ -145,8 +176,9 @@ function crearFormulario(){
     formulario.appendChild(inputGeneroPelicula);
     formulario.appendChild(labelUrlImage);
     formulario.appendChild(inputUrlImagePelicula);
+    
+    formulario.appendChild(botonesContainer);
 
-    formulario.appendChild(botonEnviar);
 
     formulario.setAttribute('class', 'formulario')
 
@@ -187,6 +219,18 @@ function crearListaPeliculas(){
 
         listaPeliculas.appendChild(itemLista);
     }
+    const botonVolverAtras = document.createElement('button');
+    botonVolverAtras.setAttribute('class', 'button');
+    botonVolverAtras.innerText = 'Volver Atras';
+    botonVolverAtras.addEventListener('click', () => {
+        botonAñadirPelis.style.display = "block";
+        botonVerPelis.style.display = "block";
+        listaPeliculas.style.display = 'none';
+        titulo.style.display = 'none';
+        botonVolverAtras.style.display = 'none';
+    
+    })
+    document.getElementById('bodyID').appendChild(botonVolverAtras);
     document.getElementById('bodyID').appendChild(titulo);
     document.getElementById('bodyID').appendChild(listaPeliculas);
 }

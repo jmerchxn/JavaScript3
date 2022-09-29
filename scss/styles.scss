@@ -19,6 +19,23 @@ body {
   color: white;
   margin: 0;
   padding: 0;
+
+
+
+  .button {
+    color: white;
+    background-color: rgb(91, 146, 91);
+    border: none;
+    box-shadow: none;
+    padding: 16px 26px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+  }
   
 
 
@@ -58,6 +75,11 @@ body {
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     color: black;
+
+    .botones-container{
+      display: flex;
+      flex-direction: row-reverse;
+    }
 
     &__label{
       font-family: Arial, Helvetica, sans-serif;
@@ -111,7 +133,8 @@ body {
     &__item{
       display: flex;
       flex-direction: column;
-      gap: 1srem;
+      gap: 1rem;
+      align-items: center;
       &-nombre{
         font-family: Arial, Helvetica, sans-serif;
       }
