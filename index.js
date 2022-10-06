@@ -29,20 +29,16 @@ const jujutsuKaisen = new Pelicula("Jujutsu Kaisen", "ATP", 84, "AcciÃ³n/FantasÃ
 
 
 
-let peliculas = [jujutsuKaisen, elPadrino, jurassicPark];
-
-
-
 localStorage.setItem("El padrino", JSON.stringify(elPadrino));
 localStorage.setItem("Jurassic Park", JSON.stringify(jurassicPark));
 localStorage.setItem("Jujutsu Kaisen", JSON.stringify(jujutsuKaisen));
 
 
 
-function subirPelicula(nombreDePelicula, tipoDePelicula, minutosDePelicula, generoDePelicula) {
-    const peliculaASubir = new Pelicula(nombreDePelicula, tipoDePelicula, minutosDePelicula, generoDePelicula)
+function subirPelicula(nombreDePelicula, tipoDePelicula, minutosDePelicula, generoDePelicula, urlImage) {
+    const peliculaASubir = new Pelicula(nombreDePelicula, tipoDePelicula, minutosDePelicula, generoDePelicula, urlImage)
 
-    peliculaASubir ? localStorage.setItem(nombreDePelicula, JSONN.stringify(peliculaASubir)) : '';  // Ternario
+    peliculaASubir ? localStorage.setItem(nombreDePelicula, JSON.stringify(peliculaASubir)) : '';  // Ternario
 }
 
 function crearFormulario(){
@@ -250,4 +246,16 @@ botonVerPelis.addEventListener("click", () => {
     crearListaPeliculas();
 });
 
+fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=db39b95d322339896bfb5e78667f2021')
+.then((response)=> response.json())
+.then((json) => guardarPeliculas(json.results))
+.catch((err) => console.log('solicitud fallida'), err)
 
+function guardarPeliculas(peliculas) {
+    for( let i = 0; i < peliculas.length; i++) {
+        let peliculaAAgregar = peliculas[i];
+
+        subirPelicula(peliculaAAgregar.title, '+' + peliculaAAgregar.genre_ids[0].toString(), 100, 'Indefinido', 'https://image.tmdb.org/t/p/w500' + peliculaAAgregar.poster_path);
+    }
+
+}
